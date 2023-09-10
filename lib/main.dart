@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         ),
         home: MyHomePage(),
       ),
@@ -52,65 +52,60 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-var selectedIndex = 0;
+  var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-  Widget page;
-  switch (selectedIndex) {
-    case 0:
-      page = GeneratorPage();
-      break;
-    case 1:
-      page = FavoritesPage();
-      break;
-    default:
-      throw UnimplementedError('no widget for $selectedIndex');
-  }
+    Widget page;
+    switch (selectedIndex) {
+      case 0:
+        page = GeneratorPage();
+        break;
+      case 1:
+        page = FavoritesPage();
+        break;
+      default:
+        throw UnimplementedError('no widget for $selectedIndex');
+    }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          body: Row(
-            children: [
-              SafeArea(
-                child: NavigationRail(
-                  extended: constraints.maxWidth >= 600,
-                  destinations: [
-                    NavigationRailDestination(
-                      icon: Icon(Icons.home),
-                      label: Text('Home'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.favorite),
-                      label: Text('Favorites'),
-                    ),
-                  ],
-                  selectedIndex: selectedIndex,
-                  onDestinationSelected: (value) {
-                    // ↓ Replace print with this.
-                    setState(() {
-                      selectedIndex = value;
-                    });
-
-                  },
-                ),
+    return LayoutBuilder(builder: (context, constraints) {
+      return Scaffold(
+        body: Row(
+          children: [
+            SafeArea(
+              child: NavigationRail(
+                extended: constraints.maxWidth >= 600,
+                destinations: [
+                  NavigationRailDestination(
+                    icon: Icon(Icons.home),
+                    label: Text('Home'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.favorite),
+                    label: Text('Favorites'),
+                  ),
+                ],
+                selectedIndex: selectedIndex,
+                onDestinationSelected: (value) {
+                  // ↓ Replace print with this.
+                  setState(() {
+                    selectedIndex = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  child: page,
-                ),
+            ),
+            Expanded(
+              child: Container(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                child: page,
               ),
-            ],
-          ),
-        );
-      }
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
-
 
 class GeneratorPage extends StatelessWidget {
   @override
@@ -184,7 +179,6 @@ class FavoritesPage extends StatelessWidget {
   }
 }
 
-
 class BigCard extends StatelessWidget {
   const BigCard({
     super.key,
@@ -195,7 +189,7 @@ class BigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);       // ← Add this.
+    final theme = Theme.of(context); // ← Add this.
 
     // ↓ Add this.
     final style = theme.textTheme.displayLarge!.copyWith(
@@ -203,14 +197,14 @@ class BigCard extends StatelessWidget {
     );
 
     return Card(
-      color: theme.colorScheme.primary,    // ← And also this.
+      color: theme.colorScheme.primary, // ← And also this.
       child: Padding(
         padding: const EdgeInsets.all(30.0),
         // ↓ Make the following change.
         child: Text(
           pair.asPascalCase,
           style: style,
-          semanticsLabel: "${pair.first} ${pair.second}",
+          semanticsLabel: '${pair.first} ${pair.second}',
         ),
       ),
     );
