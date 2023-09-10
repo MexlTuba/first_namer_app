@@ -7,17 +7,20 @@
         {
             "name": "first_namer_app",
             "request": "launch",
+            "program": "lib/widgets/main.dart",
             "type": "dart"
         },
         {
             "name": "first_namer_app (profile mode)",
             "request": "launch",
+            "program": "lib/widgets/main.dart",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "first_namer_app (release mode)",
             "request": "launch",
+            "program": "lib/widgets/main.dart",
             "type": "dart",
             "flutterMode": "release"
         }
